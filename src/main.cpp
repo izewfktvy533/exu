@@ -1,39 +1,28 @@
 #include <iostream>
-#include <cstring>
-#include <fstream>
-//#include "emulator.h"
+//#include <cstring>
+//#include <fstream>
 
-
-using namespace std;
+#include "../include/emulator.h"
 
 
 int main(int argc, char* argv[]) {
-    //Emulator emulator;
-    //emulator.init();
+    char* fileName;
+    FILE* fp;
+    Emulator emulator;
 
 
     if(argc != 2) {
+        std::printf("invaliable arguments\n");
+        return 1;
     }
+    fileName = argv[1];
 
-    char* fileName = argv[1];
-    FILE* f = fopen(fileName, "rb");
-
-    size_t size = 1;
-    size_t count = 512;
-    uint8_t* buf = new uint8_t[count];
+    fp = std::fopen(fileName, "rb");
+    emulator.init(fp);
+    std::fclose(fp);
     
-    memset(buf, 0, sizeof(buf));
-    fread(buf, size, count, f);
-
-    for(int i=0; i<count/2; i+=2) {
-        if(!(i==0) && !(i % 16)) {
-            printf("\n");
-        }
-        printf("%02x%02x ", buf[i+1], buf[i]);
-    }
-    printf("\n");
-
-    //emulator.destroy();
+    emulator.dumpMemory();
+    emulator.destroy();
 
     return 0;
 }
