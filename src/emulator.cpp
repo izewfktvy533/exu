@@ -7,6 +7,7 @@
 void Emulator::init(FILE* fp) {
     memory = new uint8_t[MEMORY_SIZE_BYTE];
     memset(memory, 0, sizeof(memory));
+    memset(registers, 0, sizeof(registers));
     std::fread(memory, 1, MEMORY_SIZE_BYTE, fp);
 }
 
