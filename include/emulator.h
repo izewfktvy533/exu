@@ -10,19 +10,20 @@
 
 class Emulator {
     public:    
-        int  init();
         int  fetch();
         int  decode();
         int  operand();
         int  execute();
         int  writeback();
-        int  destory();
+        void init(FILE*);
+        void destroy();
         void dump();
         void dumpRegisters();
         void dumpMemory();
         void dumpOpecode();
 
     private:
+        const int MEMORY_SIZE_BYTE = 512;
         enum Registers {
             EAX,
             ECX,
@@ -45,4 +46,4 @@ class Emulator {
 };
 
 
-#endif _EMULATOR_H_
+#endif 
