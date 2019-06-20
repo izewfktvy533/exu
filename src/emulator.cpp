@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <iostream>
 #include <cstring>
 
@@ -25,13 +26,13 @@ int Emulator::operand() {
 
 int Emulator::writeback() {
 }
-
 */
+
 void Emulator::destroy() {
     delete memory;
 }
-/*
 
+/*
 void Emulator::dump() {
 }
 
