@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include <vector>
 //#include "emulator.h"
 
 
@@ -21,12 +20,12 @@ int main(int argc, char* argv[]) {
 
     size_t size = 1;
     size_t count = 512;
-    vector<uint8_t> buf(count);
+    uint8_t* buf = new uint8_t[count];
     
-    //memset(buf, 0, buf.size());
-    fread(&buf[0], size, count, f);
+    memset(buf, 0, sizeof(buf));
+    fread(buf, size, count, f);
 
-    for(int i=0; i<buf.size()/2; i+=2) {
+    for(int i=0; i<count/2; i+=2) {
         if(!(i==0) && !(i % 16)) {
             printf("\n");
         }
