@@ -1,11 +1,11 @@
 #ifndef _EMULATOR_H_
 #define _EMULATOR_H_
 
-#include "fetcher.h"
-#include "decoder.h"
-#include "operander.h"
-#include "excuter.h"
-#include "writebacker.h"
+//#include "fetcher.h"
+//#include "decoder.h"
+//#include "operander.h"
+//#include "excuter.h"
+//#include "writebacker.h"
 
 
 class Emulator {
@@ -37,11 +37,11 @@ class Emulator {
         };
         std::uint32_t    registers[REGISTERS_COUNT];
         std::uint8_t*    memory;
-        Fetcher     fetcher;
-        Decoder     decoder;
-        Operander   operander;
-        Executer    executer;
-        Writebacker writebacker;
+        //Fetcher     fetcher;
+        //Decoder     decoder;
+        //Operander   operander;
+        //Executer    executer;
+        //Writebacker writebacker;
 };
 
 
