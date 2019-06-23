@@ -27,6 +27,7 @@ class Emulator {
         };
         std::uint32_t    registers[REGISTERS_COUNT];
         std::uint8_t*    memory;
+        std::uint8_t     opecode;
 };
 
 

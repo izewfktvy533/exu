@@ -16,14 +16,18 @@ void Emulator::destroy() {
     delete memory;
 }
 
-/*
+
 void Emulator::dump() {
+}
+
+
+void Emulator::dumpOperand() {
 }
 
 
 void Emulator::dumpRegisters() {
 }
-*/
+
 
 void Emulator::dumpMemory() {
     for(int i=0; i<MEMORY_SIZE_BYTE/2; i+=2) {
@@ -37,8 +41,3 @@ void Emulator::dumpMemory() {
     }
     std::printf("\n");
 }
-
-/*
-void Emulator::dumpOperand() {
-}
-*/
