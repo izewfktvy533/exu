@@ -11,6 +11,8 @@ class Emulator {
         void dumpMemory();
         void dumpOpecode();
 
+    private:
+        const int MEMORY_SIZE_BYTE = 512;
         enum Registers {
             EAX,
             ECX,
@@ -26,9 +28,6 @@ class Emulator {
         std::uint32_t    registers[REGISTERS_COUNT];
         std::uint8_t*    memory;
         std::uint8_t     opecode;
-    
-    private:
-        const int MEMORY_SIZE_BYTE = 512;
 };
 
 

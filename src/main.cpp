@@ -31,9 +31,6 @@ int main(int argc, char* argv[]) {
     emulator->init(fp);
     std::fclose(fp);
     
-    emulator->dumpOpecode();
-    emulator->dumpMemory();
-    
     while(1) {
         std::cout << "Please input Enter key > ";
         fgetc(stdin);
@@ -43,7 +40,6 @@ int main(int argc, char* argv[]) {
         executer.execute(emulator);
         writebacker.writeback(emulator);
         
-        emulator->dumpOpecode();
         emulator->dumpMemory();
     }
     

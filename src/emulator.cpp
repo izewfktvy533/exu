@@ -21,9 +21,7 @@ void Emulator::dump() {
 }
 
 
-void Emulator::dumpOpecode() {
-    std::printf("opecode\n");
-    std::printf("%02x\n", opecode);
+void Emulator::dumpOperand() {
 }
 
 
@@ -32,8 +30,6 @@ void Emulator::dumpRegisters() {
 
 
 void Emulator::dumpMemory() {
-    std::printf("memory\n");
-
     for(int i=0; i<MEMORY_SIZE_BYTE/2; i+=2) {
         if(!(i==0) && !(i % 16)) {
             std::printf("\n");
