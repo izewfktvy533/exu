@@ -11,22 +11,6 @@ void Emulator::init(FILE* fp) {
     std::fread(memory, 1, MEMORY_SIZE_BYTE, fp);
 }
 
-/*
-int Emulator::fetch() {
-}
-
-
-int Emulator::decode() {
-}
-
-
-int Emulator::operand() {
-}
-
-
-int Emulator::writeback() {
-}
-*/
 
 void Emulator::destroy() {
     delete memory;
