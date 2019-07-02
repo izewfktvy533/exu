@@ -26,6 +26,8 @@ class Emulator {
         std::uint32_t    registers[REGISTERS_COUNT];
         std::uint8_t*    memory;
         std::uint8_t     opecode;
+        int arg1;
+        int arg2;
     
     private:
         const int MEMORY_SIZE_BYTE = 512;

@@ -8,6 +8,10 @@ class Operander {
     public:
         void operand(Emulator*);
 
+    private:
+        std::uint8_t  operand_imm8(Emulator*);
+        std::uint32_t operand_imm32(Emulator*);
+
 };
 
 

@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
 
     if(argc != 2) {
-        std::printf("invaliable arguments\n");
+        std::cout << "invaliable arguments" << std::endl;
         return 1;
     }
     fileName = argv[1];
@@ -33,18 +33,23 @@ int main(int argc, char* argv[]) {
     
     emulator->dumpOpecode();
     emulator->dumpMemory();
+    std::cout << std::endl;
     
     while(1) {
         std::cout << "Please input Enter key > ";
         fgetc(stdin);
         fetcher.fetch(emulator);
-        decoder.decode(emulator);
+        if(decoder.decode(emulator) < 0) {
+            std::cout << "Decode Error" << std::endl;
+        }
         operander.operand(emulator);
         executer.execute(emulator);
         writebacker.writeback(emulator);
         
         emulator->dumpOpecode();
+        emulator->dumpRegisters();
         emulator->dumpMemory();
+        std::cout << std::endl;
     }
     
     emulator->destroy();

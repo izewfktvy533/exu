@@ -2,11 +2,12 @@
 #define _DECODER_H_
 
 #include "emulator.h"
+//TODO: #include "modrm.h"
 
 
 class Decoder {
     public:
-        void decode(Emulator*);
+        int decode(Emulator*);
 
 };
 

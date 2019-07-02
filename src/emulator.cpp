@@ -22,17 +22,26 @@ void Emulator::dump() {
 
 
 void Emulator::dumpOpecode() {
-    std::printf("opecode\n");
-    std::printf("%02x\n", opecode);
+    std::printf("opecode: %02x\n\n", opecode);
 }
 
 
 void Emulator::dumpRegisters() {
+    std::printf("[Registers]\n");
+    std::printf("EAX: 0x%x\n", registers[EAX]);
+    std::printf("ECX: 0x%x\n", registers[ECX]);
+    std::printf("EDX: 0x%x\n", registers[EDX]);
+    std::printf("EBX: 0x%x\n", registers[EBX]);
+    std::printf("ESP: 0x%x\n", registers[ESP]);
+    std::printf("EBP: 0x%x\n", registers[EBP]);
+    std::printf("ESI: 0x%x\n", registers[ESI]);
+    std::printf("EDI: 0x%x\n", registers[EDI]);
+    std::printf("EIP: 0x%x\n\n", registers[EIP]);
 }
 
 
 void Emulator::dumpMemory() {
-    std::printf("memory\n");
+    std::printf("[Memory]\n");
 
     for(int i=0; i<MEMORY_SIZE_BYTE/2; i+=2) {
         if(!(i==0) && !(i % 16)) {
