@@ -11,37 +11,38 @@ void Emulator::init(FILE* fp) {
     std::fread(memory, 1, MEMORY_SIZE_BYTE, fp);
 }
 
-/*
-int Emulator::fetch() {
-}
-
-
-int Emulator::decode() {
-}
-
-
-int Emulator::operand() {
-}
-
-
-int Emulator::writeback() {
-}
-*/
 
 void Emulator::destroy() {
     delete memory;
 }
 
-/*
+
 void Emulator::dump() {
 }
 
 
-void Emulator::dumpRegisters() {
+void Emulator::dumpOpecode() {
+    std::printf("opecode: %02x\n\n", opecode);
 }
-*/
+
+
+void Emulator::dumpRegisters() {
+    std::printf("[Registers]\n");
+    std::printf("EAX: 0x%x\n", registers[EAX]);
+    std::printf("ECX: 0x%x\n", registers[ECX]);
+    std::printf("EDX: 0x%x\n", registers[EDX]);
+    std::printf("EBX: 0x%x\n", registers[EBX]);
+    std::printf("ESP: 0x%x\n", registers[ESP]);
+    std::printf("EBP: 0x%x\n", registers[EBP]);
+    std::printf("ESI: 0x%x\n", registers[ESI]);
+    std::printf("EDI: 0x%x\n", registers[EDI]);
+    std::printf("EIP: 0x%x\n\n", registers[EIP]);
+}
+
 
 void Emulator::dumpMemory() {
+    std::printf("[Memory]\n");
+
     for(int i=0; i<MEMORY_SIZE_BYTE/2; i+=2) {
         if(!(i==0) && !(i % 16)) {
             std::printf("\n");
@@ -53,8 +54,3 @@ void Emulator::dumpMemory() {
     }
     std::printf("\n");
 }
-
-/*
-void Emulator::dumpOperand() {
-}
-*/
