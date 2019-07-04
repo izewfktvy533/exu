@@ -27,15 +27,26 @@ class Emulator {
             EIP,
             REGISTERS_COUNT
         };
+
+        enum Offsets{
+            PREFIX,
+            OPECODE,
+            MODRM,
+            SIB,
+            DISPLACEMENT,
+            IMMEDIATE
+        };
+
         std::uint32_t registers[REGISTERS_COUNT];
         std::uint8_t* memory;
-        std::uint8_t  opecode;
-        ModRM modrm;
-        SIB   sib;
-        DISP  disp;
-        int operand[2];
+        std::uint8_t  head;
+        std::int32_t  operand[2];
+        std::uint32_t instruction[6];
+        //ModRM modrm;
+        //SIB   sib;
+        //DISP  disp;
 
-        void parseModRM();
+        //void parseModRM();
     
     private:
         const int MEMORY_SIZE_BYTE = 512;

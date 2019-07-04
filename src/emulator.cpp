@@ -16,7 +16,7 @@ void Emulator::destroy() {
     delete memory;
 }
 
-
+/*
 void Emulator::parseModRM() {
     std::uint8_t tmp = memory[registers[EIP]++];
     
@@ -38,10 +38,11 @@ void Emulator::parseModRM() {
         disp.disp8 = memory[registers[EIP]++];
     }
 }
+*/
 
 
 void Emulator::dumpOpecode() {
-    std::printf("opecode: 0x%02x\n\n", opecode);
+    std::printf("opecode: 0x%02x\n\n", head);
 }
 
 
