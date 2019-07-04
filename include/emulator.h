@@ -42,11 +42,6 @@ class Emulator {
         std::uint8_t  head;
         std::int32_t  operand[2];
         std::uint32_t instruction[6];
-        //ModRM modrm;
-        //SIB   sib;
-        //DISP  disp;
-
-        //void parseModRM();
     
     private:
         const int MEMORY_SIZE_BYTE = 512;

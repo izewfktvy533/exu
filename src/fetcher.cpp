@@ -1,13 +1,17 @@
 #include <iostream>
+#include <cstring>
+
 #include "../include/fetcher.h"
 
 
 void Fetcher::fetch(Emulator* emulator) {
     emulator->head = emulator->memory[emulator->registers[emulator->EIP]++];
+    memset(emulator->instruction, 0, sizeof(emulator->instruction));
 
     switch(emulator->head) {
         case 0x89:
             {
+            emulator->instruction[emulator->OPECODE] = emulator->head;
             emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
 
             std::uint8_t mod     = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;

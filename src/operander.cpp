@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "../include/operander.h"
 
 
@@ -79,11 +80,6 @@ void Operander::operand(Emulator* emulator) {
             std::uint8_t mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
             std::uint8_t reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
             std::uint8_t rm  = (emulator->instruction[emulator->MODRM] & 0x07);
-
-            std::printf("mod: %d\n", mod);
-            std::printf("reg: %d\n", reg);
-            std::printf("rm : %d\n", rm);
-
             std::int32_t rm32;
             std::int32_t r32 = reg;
 
@@ -108,8 +104,6 @@ void Operander::operand(Emulator* emulator) {
             {
             emulator->operand[0] = emulator->head - 0xb8;
             emulator->operand[1] = emulator->instruction[emulator->IMMEDIATE];
-            std::printf("operand1: %d\n", emulator->operand[0]);
-            std::printf("operand2: %d\n", emulator->operand[1]);
             }
 
             break;
@@ -122,8 +116,6 @@ void Operander::operand(Emulator* emulator) {
             {
             emulator->operand[0] = emulator->head - 0xb8;
             emulator->operand[1] = emulator->instruction[emulator->IMMEDIATE];
-            std::printf("operand1: %d\n", emulator->operand[0]);
-            std::printf("operand2: %d\n", emulator->operand[1]);
             }
 
             break;
