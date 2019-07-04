@@ -2,7 +2,6 @@
 #define _DECODER_H_
 
 #include "emulator.h"
-//TODO: #include "modrm.h"
 
 
 class Decoder {

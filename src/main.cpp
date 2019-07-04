@@ -25,19 +25,18 @@ int main(int argc, char* argv[]) {
         std::cout << "invaliable arguments" << std::endl;
         return 1;
     }
-    fileName = argv[1];
 
+    fileName = argv[1];
     fp = std::fopen(fileName, "rb");
     emulator->init(fp);
     std::fclose(fp);
     
-    emulator->dumpOpecode();
-    emulator->dumpMemory();
-    std::cout << std::endl;
+    emulator->dump();
     
     while(1) {
         std::cout << "Please input Enter key > ";
         fgetc(stdin);
+
         fetcher.fetch(emulator);
         if(decoder.decode(emulator) < 0) {
             std::cout << "Decode Error" << std::endl;
@@ -45,11 +44,8 @@ int main(int argc, char* argv[]) {
         operander.operand(emulator);
         executer.execute(emulator);
         writebacker.writeback(emulator);
-        
-        emulator->dumpOpecode();
-        emulator->dumpRegisters();
-        emulator->dumpMemory();
-        std::cout << std::endl;
+
+        emulator->dump();
     }
     
     emulator->destroy();
