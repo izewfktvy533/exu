@@ -10,8 +10,6 @@ void Executer::execute(Emulator* emulator) {
         case 0xb8:
             break;
         
-        default:
-            break;
     }
 
 }
