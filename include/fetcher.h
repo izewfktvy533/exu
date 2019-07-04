@@ -7,7 +7,7 @@
 class Fetcher {
     public:
         void fetch(Emulator*);
-
+        
 };
 
 

@@ -20,12 +20,40 @@ std::uint32_t Operander::operand_imm32(Emulator* emulator) {
 
 void Operander::operand(Emulator* emulator) {
     switch(emulator->opecode) {
-        case 0xb8:
-            std::uint8_t registerNumber = emulator->opecode - 0xb8;
-            std::int32_t imm32 = operand_imm32(emulator);
-            emulator->arg1 = registerNumber;
-            emulator->arg2 = imm32;
+        case 0x89:
+            /* 
+             * mov_rm32_r32
+             */
+            {   
+            std::int32_t rm32;
+            std::int32_t r32 = emulator->registers[emulator->modrm.reg];
+            if(emulator->modrm.mod == 3) {
+                rm32 = emulator->modrm.rm;
+            }
+            /* TODO 
+            else{
+
+            }
+            */
+
+            emulator->operand[0] = rm32;
+            emulator->operand[1] = r32;
+            }
             break;
+            
+        
+        case 0xb8:
+            /*
+             * mov r32 imm32
+             */
+            {
+            std::uint8_t r32 = emulator->opecode - 0xb8;
+            std::int32_t imm32 = operand_imm32(emulator);
+            emulator->operand[0] = r32;
+            emulator->operand[1] = imm32;
+
+            break;
+            }
 
     }
 
