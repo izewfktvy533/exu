@@ -4,12 +4,14 @@
 
 
 int Decoder::decode(Emulator* emulator) {
-    switch(emulator->opecode) {
+    switch(emulator->head) {
         case 0x89:
-            emulator->parseModRM();
+            return 0;
+
+        case 0xb8:
             return 0;
         
-        case 0xb8:
+        case 0xb9:
             return 0;
 
         default:

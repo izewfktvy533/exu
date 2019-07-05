@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
         fetcher.fetch(emulator);
         if(decoder.decode(emulator) < 0) {
             std::cout << "Decode Error" << std::endl;
+            break;
         }
         operander.operand(emulator);
         executer.execute(emulator);

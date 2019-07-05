@@ -1,4 +1,4 @@
 # Jex86
 
 ## Version
-ver.1.0.1
+ver.1.0.2
