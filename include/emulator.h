@@ -7,14 +7,11 @@
 
 
 class Emulator {
-    public:    
-        void init(FILE*);
-        void destroy();
-        void dump();
-        void dumpRegisters();
-        void dumpMemory();
-        void dumpOpecode();
-
+    public:
+        const int MEMORY_SIZE_BYTE = 1 * 1024;
+        const std::uint32_t INITIAL_ESP_ENTRY_POINT = 0x7c;
+        const std::uint32_t INITIAL_EIP_ENTRY_POINT = 0x7c;
+        
         enum Registers {
             EAX,
             ECX,
@@ -27,19 +24,29 @@ class Emulator {
             EIP,
             REGISTERS_COUNT
         };
-        std::uint32_t registers[REGISTERS_COUNT];
-        std::uint8_t* memory;
-        std::uint8_t  opecode;
-        ModRM modrm;
-        SIB   sib;
-        DISP  disp;
-        int operand[2];
 
-        void parseModRM();
-    
-    private:
-        const int MEMORY_SIZE_BYTE = 512;
-        
+        enum Offsets{
+            PREFIX,
+            OPECODE,
+            MODRM,
+            SIB,
+            DISPLACEMENT,
+            IMMEDIATE
+        };
+
+        std::uint32_t  registers[REGISTERS_COUNT];
+        std::uint8_t*  memory;
+        std::uint8_t   head;
+        std::uint32_t* operand[2];
+        std::uint32_t  instruction[6];
+
+        void init(FILE*);
+        void destroy();
+        void dump();
+        void dumpRegisters();
+        void dumpMemory();
+        void dumpOpecode();
+
 };
 
 
