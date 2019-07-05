@@ -7,14 +7,11 @@
 
 
 class Emulator {
-    public:    
-        void init(FILE*);
-        void destroy();
-        void dump();
-        void dumpRegisters();
-        void dumpMemory();
-        void dumpOpecode();
-
+    public:
+        const int MEMORY_SIZE_BYTE = 1 * 1024;
+        const std::uint32_t INITIAL_ESP_ENTRY_POINT = 0x7c;
+        const std::uint32_t INITIAL_EIP_ENTRY_POINT = 0x7c;
+        
         enum Registers {
             EAX,
             ECX,
@@ -37,15 +34,19 @@ class Emulator {
             IMMEDIATE
         };
 
-        std::uint32_t registers[REGISTERS_COUNT];
-        std::uint8_t* memory;
-        std::uint8_t  head;
-        std::int32_t  operand[2];
-        std::uint32_t instruction[6];
-    
-    private:
-        const int MEMORY_SIZE_BYTE = 512;
-        
+        std::uint32_t  registers[REGISTERS_COUNT];
+        std::uint8_t*  memory;
+        std::uint8_t   head;
+        std::uint32_t* operand[2];
+        std::uint32_t  instruction[6];
+
+        void init(FILE*);
+        void destroy();
+        void dump();
+        void dumpRegisters();
+        void dumpMemory();
+        void dumpOpecode();
+
 };
 
 

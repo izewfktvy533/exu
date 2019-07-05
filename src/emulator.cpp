@@ -6,9 +6,14 @@
 
 void Emulator::init(FILE* fp) {
     memory = new uint8_t[MEMORY_SIZE_BYTE];
+    
     memset(memory, 0, sizeof(memory));
     memset(registers, 0, sizeof(registers));
-    std::fread(memory, 1, MEMORY_SIZE_BYTE, fp);
+
+    registers[EIP] = INITIAL_EIP_ENTRY_POINT;
+    registers[ESP] = INITIAL_ESP_ENTRY_POINT;
+    
+    std::fread(&memory[INITIAL_EIP_ENTRY_POINT], 1, MEMORY_SIZE_BYTE, fp);
 }
 
 
@@ -32,7 +37,8 @@ void Emulator::dumpRegisters() {
     std::printf("EBP: 0x%x\n", registers[EBP]);
     std::printf("ESI: 0x%x\n", registers[ESI]);
     std::printf("EDI: 0x%x\n", registers[EDI]);
-    std::printf("EIP: 0x%x\n\n", registers[EIP]);
+    std::printf("EIP: 0x%x\n", registers[EIP]);
+    std::printf("\n");
 }
 
 

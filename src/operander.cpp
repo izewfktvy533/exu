@@ -20,10 +20,10 @@ std::uint32_t Operander::operand_imm32(Emulator* emulator) {
 
 
 std::uint32_t Operander::calcMemoryAddress(Emulator* emulator) {
-    std::uint8_t mod  = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
-    std::uint8_t reg  = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
-    std::uint8_t rm   = (emulator->instruction[emulator->MODRM] & 0x07);
-    std::uint8_t sib  = emulator->instruction[emulator->SIB];
+    std::uint8_t  mod  = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+    std::uint8_t  reg  = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+    std::uint8_t  rm   = (emulator->instruction[emulator->MODRM] & 0x07);
+    std::uint8_t  sib  = emulator->instruction[emulator->SIB];
     std::uint32_t disp = emulator->instruction[emulator->DISPLACEMENT];
 
 
@@ -85,13 +85,15 @@ void Operander::operand(Emulator* emulator) {
 
             if(mod == 3) {
                 rm32 = rm;
+                emulator->operand[0] = (std::uint32_t*)(&(emulator->registers[rm32]));
             }
             else{
                 rm32 = calcMemoryAddress(emulator);
+                emulator->operand[0] = (std::uint32_t*)(&(emulator->memory[rm32]));
             }
 
-            emulator->operand[0] = rm32;
-            emulator->operand[1] = emulator->registers[r32];
+            
+            emulator->operand[1] = (std::uint32_t*)(&(emulator->registers[r32]));
             }
 
             break;
@@ -102,8 +104,8 @@ void Operander::operand(Emulator* emulator) {
              * mov r32 imm32
              */
             {
-            emulator->operand[0] = emulator->head - 0xb8;
-            emulator->operand[1] = emulator->instruction[emulator->IMMEDIATE];
+            emulator->operand[0] = (std::uint32_t*)(&(emulator->registers[emulator->instruction[emulator->OPECODE] - 0xb8]));
+            emulator->operand[1] = (std::uint32_t*)(&(emulator->instruction[emulator->IMMEDIATE]));
             }
 
             break;
@@ -114,8 +116,8 @@ void Operander::operand(Emulator* emulator) {
              * mov r32 imm32
              */
             {
-            emulator->operand[0] = emulator->head - 0xb8;
-            emulator->operand[1] = emulator->instruction[emulator->IMMEDIATE];
+            emulator->operand[0] = (std::uint32_t*)(&(emulator->registers[emulator->head - 0xb8]));
+            emulator->operand[1] = (std::uint32_t*)(&(emulator->instruction[emulator->IMMEDIATE]));
             }
 
             break;
