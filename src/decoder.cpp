@@ -6,12 +6,16 @@
 int Decoder::decode(Emulator* emulator) {
     switch(emulator->head) {
         case 0x89:
-            return 0;
-
         case 0xb8:
-            return 0;
-        
         case 0xb9:
+        case 0xba:
+        case 0xbb:
+        case 0xbc:
+        case 0xbd:
+        case 0xbe:
+        case 0xbf:
+        case 0xe9:
+        case 0xeb:
             return 0;
 
         default:
