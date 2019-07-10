@@ -9,6 +9,9 @@ void Emulator::init(FILE* fp) {
     
     memset(memory, 0, sizeof(memory));
     memset(registers, 0, sizeof(registers));
+    memset(&head, 0, sizeof(head));
+    memset(operand, 0, sizeof(operand));
+    memset(instruction, 0 ,sizeof(instruction));
 
     registers[EIP] = INITIAL_EIP_ENTRY_POINT;
     registers[ESP] = INITIAL_ESP_ENTRY_POINT;
@@ -45,8 +48,9 @@ void Emulator::dumpRegisters() {
 void Emulator::dumpMemory() {
     std::printf("[Memory]\n");
 
-    for(int i=0; i<MEMORY_SIZE_BYTE/2; i+=2) {
-        if(!(i==0) && !(i % 16)) {
+    //for(int i=INITIAL_EIP_ENTRY_POINT; i<MEMORY_SIZE_BYTE/2; i+=2) {
+    for(int i=INITIAL_EIP_ENTRY_POINT; i<INITIAL_EIP_ENTRY_POINT + 16*9; i+=2) {
+        if(!(i==INITIAL_EIP_ENTRY_POINT) && !(i % 16)) {
             std::printf("\n");
         }
         if(!(i % 16)) {
