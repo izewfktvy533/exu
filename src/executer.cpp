@@ -15,6 +15,7 @@ void Executer::execute(Emulator* emulator) {
         case 0xbe:
         case 0xbf:
         case 0xe9:
+        case 0xeb:
             break;
         
     }

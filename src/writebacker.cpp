@@ -23,6 +23,11 @@ void Writebacker::writeback(Emulator* emulator) {
         case 0xe9:
             *(emulator->operand[0]) += *((std::int32_t*)(emulator->operand[1]));
             break;
+
+        case 0xeb:
+            *(emulator->operand[0]) += (std::int8_t)(*((std::int32_t*)(emulator->operand[1])));
+            break;
+
     }
 
 }

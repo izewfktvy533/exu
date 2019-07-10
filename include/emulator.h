@@ -9,8 +9,10 @@
 class Emulator {
     public:
         const int MEMORY_SIZE_BYTE = 512 * 1024;
-        const std::uint32_t INITIAL_ESP_ENTRY_POINT = 0x7c00;
-        const std::uint32_t INITIAL_EIP_ENTRY_POINT = 0x7c00;
+        //const std::uint32_t INITIAL_ESP_ENTRY_POINT = 0x7c00;
+        const std::uint32_t INITIAL_ESP_ENTRY_POINT = 0x00;
+        //const std::uint32_t INITIAL_EIP_ENTRY_POINT = 0x7c00;
+        const std::uint32_t INITIAL_EIP_ENTRY_POINT = 0x00;
         
         enum Registers {
             EAX,

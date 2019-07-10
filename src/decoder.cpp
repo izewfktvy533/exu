@@ -15,6 +15,7 @@ int Decoder::decode(Emulator* emulator) {
         case 0xbe:
         case 0xbf:
         case 0xe9:
+        case 0xeb:
             return 0;
 
         default:
