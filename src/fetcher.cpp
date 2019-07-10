@@ -61,5 +61,12 @@ void Fetcher::fetch(Emulator* emulator) {
             
             break;
 
+        
+        case 0xeb:
+            emulator->instruction[emulator->OPECODE] = emulator->head;
+            emulator->instruction[emulator->REL8] = emulator->memory[emulator->registers[emulator->EIP]++];
+            
+            break;
+
     }
 }

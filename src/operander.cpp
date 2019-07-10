@@ -129,6 +129,20 @@ void Operander::operand(Emulator* emulator) {
              emulator->operand[0] = (std::uint32_t*)(&(emulator->registers[emulator->EIP]));
              emulator->operand[1] = (std::uint32_t*)(&(emulator->instruction[emulator->REL32]));
              }
+
+             break;
+
+
+        case 0xeb:
+            /*
+             * jmp rel8
+             */
+            {
+            emulator->operand[0] = (std::uint32_t*)(&(emulator->registers[emulator->EIP]));
+            emulator->operand[1] = (std::uint32_t*)(&(emulator->instruction[emulator->REL8]));
+            }
+
+            break;
     }
 
 }

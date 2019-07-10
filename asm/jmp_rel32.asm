@@ -4,4 +4,4 @@ BITS 32
     mov eax, 0x60
     mov [ecx], eax
     mov eax, ecx
-    jmp 0x00
+    jmp 0
