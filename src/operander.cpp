@@ -182,7 +182,39 @@ void Operander::operand(Emulator* emulator) {
 
             break;
        
-        
+
+        case 0xc3:
+            /*
+             * ret
+             */
+            emulator->operand[0] = (std::uint32_t*)&(emulator->registers[emulator->EIP]);
+            emulator->operand[1] = (std::uint32_t*)&(emulator->memory[emulator->registers[emulator->ESP]]);
+            emulator->registers[emulator->ESP] = emulator->registers[emulator->ESP] + 4;
+
+            for(int i=0; i < 4; i++) {
+                ((std::uint8_t*)emulator->operand[0])[i] = ((std::uint8_t*)emulator->operand[1])[i];
+            }
+            
+            break;
+
+
+        case 0xe8:
+            /*
+             * call imm32
+             */
+            emulator->registers[emulator->ESP] = emulator->registers[emulator->ESP] - 4;
+            emulator->operand[0] = (std::uint32_t*)&(emulator->memory[emulator->registers[emulator->ESP]]);
+            emulator->operand[1] = (std::uint32_t*)&(emulator->registers[emulator->EIP]);
+
+            for(int i=0; i < 4; i++) {
+                ((std::uint8_t*)emulator->operand[0])[i] = (*(emulator->operand[1]) >> (i * 8)) & 0xff;
+            }
+            
+            emulator->registers[emulator->EIP] = (std::uint32_t)emulator->registers[emulator->EIP] + (std::int32_t)emulator->instruction[emulator->IMM32];
+            
+            break;
+           
+                
         case 0xe9:
             /*
              * jmp rel16

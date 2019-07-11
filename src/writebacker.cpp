@@ -36,7 +36,6 @@ void Writebacker::writeback(Emulator* emulator) {
              */
             for(int i=0; i < 4; i++) {
                 ((std::uint8_t*)emulator->operand[0])[i] = ((std::uint8_t*)emulator->operand[1])[i];
-                //*((std::uint8_t*)(emulator->operand[0]) + i) = *((std::uint8_t*)(emulator->operand[1]) + i);
             }
 
             break;
@@ -70,6 +69,13 @@ void Writebacker::writeback(Emulator* emulator) {
              * mov r32, imm32
              */
             *(emulator->operand[0]) = (std::int32_t)(*(emulator->operand[1]));
+            break;
+        
+
+        case 0xe8:
+            /*
+             * call imm32
+             */
             break;
 
 
