@@ -5,8 +5,18 @@
 
 void Writebacker::writeback(Emulator* emulator) {
     switch(emulator->head) {
+        case 0x88:
+            /*
+             * mov rm8, r8
+             */
+            *(emulator->operand[0]) = (std::uint8_t)(*(emulator->operand[1]));
+            break;
+
         case 0x89:
-            *(emulator->operand[0]) = *(emulator->operand[1]);
+            /*
+             * mov rm32, r32
+             */
+            *(emulator->operand[0]) = (std::uint32_t)(*(emulator->operand[1]));
             break;
 
         case 0xb8:
@@ -17,15 +27,24 @@ void Writebacker::writeback(Emulator* emulator) {
         case 0xbd:
         case 0xbe:
         case 0xbf:
-            *(emulator->operand[0]) = *(emulator->operand[1]);
+            /*
+             * mov r32, imm32
+             */
+            *(emulator->operand[0]) = (std::int32_t)(*(emulator->operand[1]));
             break;
 
         case 0xe9:
-            *(emulator->operand[0]) += *((std::int32_t*)(emulator->operand[1]));
+            /*
+             * jmp rel32
+             */
+            *(emulator->operand[0]) = (std::uint32_t)((*(emulator->operand[0])) + (*((std::int32_t*)(emulator->operand[1]))));
             break;
 
         case 0xeb:
-            *(emulator->operand[0]) += (std::int8_t)(*((std::int32_t*)(emulator->operand[1])));
+            /*
+             * jmp rel8
+             */
+            *(emulator->operand[0]) = (std::uint8_t)((*(emulator->operand[0])) + (*((std::int32_t*)(emulator->operand[1]))));
             break;
 
     }
