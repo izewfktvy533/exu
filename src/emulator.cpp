@@ -49,8 +49,8 @@ void Emulator::dumpMemory() {
     std::printf("[Memory]\n");
 
     //for(int i=INITIAL_EIP_ENTRY_POINT; i<MEMORY_SIZE_BYTE/2; i+=2) {
-    for(int i=INITIAL_EIP_ENTRY_POINT; i<INITIAL_EIP_ENTRY_POINT + 16*9; i+=2) {
-        if(!(i==INITIAL_EIP_ENTRY_POINT) && !(i % 16)) {
+    for(int i=INITIAL_EIP_ENTRY_POINT - 16 * 3; i<INITIAL_EIP_ENTRY_POINT + 16*9; i+=2) {
+        if(!(i==INITIAL_EIP_ENTRY_POINT - 16 * 3) && !(i % 16)) {
             std::printf("\n");
         }
         if(!(i % 16)) {

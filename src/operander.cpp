@@ -73,6 +73,23 @@ std::uint32_t Operander::calcMemoryAddress(Emulator* emulator) {
 
 void Operander::operand(Emulator* emulator) {
     switch(emulator->head) {
+        case 0x50:
+        case 0x51:
+        case 0x52:
+        case 0x53:
+        case 0x54:
+        case 0x55:
+        case 0x56:
+        case 0x57:
+            /*
+             * push r32
+             */
+            emulator->registers[emulator->ESP] = emulator->registers[emulator->ESP] - 4;
+            emulator->operand[0] = (std::uint32_t*)&(emulator->memory[emulator->registers[emulator->ESP]]);
+            emulator->operand[1] = (std::uint32_t*)&(emulator->registers[emulator->instruction[emulator->OPECODE] - 0x50]);
+            break;
+
+
         case 0x88:
             /* 
              * mov rm8 r8
