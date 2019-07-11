@@ -90,6 +90,24 @@ void Operander::operand(Emulator* emulator) {
             break;
 
 
+        case 0x58:
+        case 0x59:
+        case 0x5a:
+        case 0x5b:
+        case 0x5c:
+        case 0x5d:
+        case 0x5e:
+        case 0x5f:
+            /*
+             * pop r32
+             */
+            emulator->operand[0] = (std::uint32_t*)&(emulator->registers[emulator->instruction[emulator->OPECODE] - 0x58]);
+            emulator->operand[1] = (std::uint32_t*)&(emulator->memory[emulator->registers[emulator->ESP]]);
+            emulator->registers[emulator->ESP] = emulator->registers[emulator->ESP] + 4;
+            break;
+
+
+
         case 0x88:
             /* 
              * mov rm8 r8

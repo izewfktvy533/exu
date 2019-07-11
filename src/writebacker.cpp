@@ -13,15 +13,32 @@ void Writebacker::writeback(Emulator* emulator) {
         case 0x55:
         case 0x56:
         case 0x57:
-            
             /*
              * push r32
              */
             for(int i=0; i < 4; i++) {
                 ((std::uint8_t*)emulator->operand[0])[i] = (*(emulator->operand[1]) >> (i * 8)) & 0xff;
             }
+            
+            break;
 
-            //*(emulator->operand[0]) = (std::uint32_t)(*(emulator->operand[1]));
+
+        case 0x58:
+        case 0x59:
+        case 0x5a:
+        case 0x5b:
+        case 0x5c:
+        case 0x5d:
+        case 0x5e:
+        case 0x5f:
+            /*
+             * pop r32
+             */
+            for(int i=0; i < 4; i++) {
+                ((std::uint8_t*)emulator->operand[0])[i] = ((std::uint8_t*)emulator->operand[1])[i];
+                //*((std::uint8_t*)(emulator->operand[0]) + i) = *((std::uint8_t*)(emulator->operand[1]) + i);
+            }
+
             break;
 
 
