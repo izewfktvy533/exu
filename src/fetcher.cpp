@@ -9,6 +9,7 @@ void Fetcher::fetch(Emulator* emulator) {
     memset(emulator->instruction, 0, sizeof(emulator->instruction)*emulator->OFFSETS_COUNT);
 
     switch(emulator->head) {
+        case 0x88:
         case 0x89:
             {
             emulator->instruction[emulator->OPECODE] = emulator->head;

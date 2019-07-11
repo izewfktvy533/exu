@@ -5,6 +5,7 @@
 
 void Executer::execute(Emulator* emulator) {
     switch(emulator->head) {
+        case 0x88:
         case 0x89:
         case 0xb8:
         case 0xb9:
