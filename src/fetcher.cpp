@@ -20,6 +20,19 @@ void Fetcher::fetch(Emulator* emulator) {
             emulator->instruction[emulator->OPECODE] = emulator->head;
             break;
 
+
+        case 0x58:
+        case 0x59:
+        case 0x5a:
+        case 0x5b:
+        case 0x5c:
+        case 0x5d:
+        case 0x5e:
+        case 0x5f:
+            emulator->instruction[emulator->OPECODE] = emulator->head;
+            break;
+
+
         case 0x88:
         case 0x89:
             {
