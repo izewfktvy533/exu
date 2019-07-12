@@ -32,6 +32,7 @@ int Decoder::decode(Emulator* emulator) {
         case 0xbe:
         case 0xbf:
         case 0xc3:
+        case 0xc9:
         case 0xe8:
         case 0xe9:
         case 0xeb:

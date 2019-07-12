@@ -196,6 +196,22 @@ void Operander::operand(Emulator* emulator) {
             }
             
             break;
+        
+
+        case 0xc9:
+            /*
+             * leave
+             */
+            emulator->registers[emulator->ESP] = emulator->registers[emulator->EBP];
+            emulator->operand[0] = (std::uint32_t*)&(emulator->registers[emulator->EBP]);
+            emulator->operand[1] = (std::uint32_t*)&(emulator->memory[emulator->registers[emulator->ESP]]);
+            emulator->registers[emulator->ESP] = emulator->registers[emulator->ESP] + 4;
+
+            for(int i=0; i < 4; i++) {
+                ((std::uint8_t*)emulator->operand[0])[i] = ((std::uint8_t*)emulator->operand[1])[i];
+            }
+
+            break;
 
 
         case 0xe8:

@@ -31,6 +31,8 @@ void Executer::execute(Emulator* emulator) {
         case 0xbd:
         case 0xbe:
         case 0xbf:
+        case 0xc3:
+        case 0xc9:
         case 0xee:
         case 0xe9:
         case 0xeb:
