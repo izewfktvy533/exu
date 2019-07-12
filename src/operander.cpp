@@ -3,22 +3,6 @@
 #include "../include/operander.h"
 
 
-std::uint8_t Operander::operand_imm8(Emulator* emulator) {
-    return emulator->memory[emulator->registers[emulator->EIP]++];
-}
-
-
-std::uint32_t Operander::operand_imm32(Emulator* emulator) {
-    uint32_t imm32 = 0;
-
-    for(int i=0; i<4; i++) {
-        imm32 |= operand_imm8(emulator) << (i * 8);
-    }
-
-    return imm32;
-}
-
-
 std::uint32_t Operander::calcMemoryAddress(Emulator* emulator) {
     std::uint8_t  mod  = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
     std::uint8_t  reg  = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;

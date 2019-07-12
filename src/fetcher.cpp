@@ -11,6 +11,7 @@ void Fetcher::fetch(Emulator* emulator) {
     std::uint8_t opecode;
     std::uint8_t rm;
 
+
     switch(emulator->head) {
         case 0x50:
         case 0x51:
