@@ -15,6 +15,7 @@ void Emulator::init(FILE* fp) {
 
     registers[EIP] = INITIAL_EIP_ENTRY_POINT;
     registers[ESP] = INITIAL_ESP_ENTRY_POINT;
+    registers[EBP] = INITIAL_EBP_ENTRY_POINT;
     
     std::fread(&memory[INITIAL_EIP_ENTRY_POINT], 1, MEMORY_SIZE_BYTE, fp);
 }
