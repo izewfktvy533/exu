@@ -80,6 +80,10 @@ void Fetcher::fetch(Emulator* emulator) {
         case 0xc3:
             emulator->instruction[emulator->OPECODE] = emulator->head;
             break;
+
+        case 0xc9:
+            emulator->instruction[emulator->OPECODE] = emulator->head;
+            break;
                     
 
         case 0xe8:

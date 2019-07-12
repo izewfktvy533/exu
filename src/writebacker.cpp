@@ -70,13 +70,6 @@ void Writebacker::writeback(Emulator* emulator) {
              */
             *(emulator->operand[0]) = (std::int32_t)(*(emulator->operand[1]));
             break;
-        
-
-        case 0xe8:
-            /*
-             * call imm32
-             */
-            break;
 
 
         case 0xe9:
@@ -85,6 +78,7 @@ void Writebacker::writeback(Emulator* emulator) {
              */
             *(emulator->operand[0]) = (std::uint32_t)((*(emulator->operand[0])) + (*((std::int32_t*)(emulator->operand[1]))));
             break;
+
 
         case 0xeb:
             /*
