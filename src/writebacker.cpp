@@ -56,6 +56,22 @@ void Writebacker::writeback(Emulator* emulator) {
             *(emulator->operand[0]) = (std::uint32_t)(*(emulator->operand[1]));
             break;
 
+        
+        case 0x8a:
+            /*
+             * mov r8, rm8
+             */
+            *(emulator->operand[0]) = (std::uint8_t)(*(emulator->operand[1]));
+            break;
+
+
+        case 0x8b:
+            /*
+             * mov r32, rm32
+             */
+            *(emulator->operand[0]) = (std::uint8_t)(*(emulator->operand[1]));
+            break;
+
 
         case 0xb8:
         case 0xb9:

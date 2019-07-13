@@ -13,6 +13,9 @@ int Decoder::decode(Emulator* emulator) {
         case 0x55:
         case 0x56:
         case 0x57:
+            /*
+             * push r32
+             */
         case 0x58:
         case 0x59:
         case 0x5a:
@@ -21,8 +24,25 @@ int Decoder::decode(Emulator* emulator) {
         case 0x5d:
         case 0x5e:
         case 0x5f:
+            /*
+             * pop r32
+             */
         case 0x88:
+            /*
+             * mov rm8, r8
+             */
         case 0x89:
+            /*
+             * mov rm32, r32
+             */
+        case 0x8a:
+            /*
+             * mov r8, rm8
+             */
+        case 0x8b:
+            /*
+             * mov r32, rm32
+             */
         case 0xb8:
         case 0xb9:
         case 0xba:
@@ -31,11 +51,29 @@ int Decoder::decode(Emulator* emulator) {
         case 0xbd:
         case 0xbe:
         case 0xbf:
+            /*
+             * mov r32, imm32
+             */
         case 0xc3:
+            /*
+             * ret
+             */
         case 0xc9:
+            /*
+             * leave
+             */
         case 0xe8:
+            /*
+             * call imm32
+             */
         case 0xe9:
+            /*
+             * jmp rel32
+             */
         case 0xeb:
+            /*
+             * jmp rel8
+             */
             return 0;
 
         default:
