@@ -140,7 +140,7 @@ void Operander::operand(Emulator* emulator) {
             }
             else{
                 rm32 = calcMemoryAddress(emulator);
-                std::printf("memory address: 0x%x\n", rm8);
+                std::printf("memory address: 0x%x\n", rm32);
                 emulator->operand[0] = (std::uint32_t*)(&(emulator->memory[rm32]));
             }
 
@@ -165,10 +165,34 @@ void Operander::operand(Emulator* emulator) {
             else {
                 rm8 = calcMemoryAddress(emulator);
                 std::printf("memory address: 0x%x\n", rm8);
-                emulator->operand[1] = (std::uint32_t)&(emulator->memory[rm8]);
+                emulator->operand[1] = (std::uint32_t*)&(emulator->memory[rm8]);
             }
             
             emulator->operand[0] = (std::uint32_t*)&(emulator->registers[r8]);
+
+            break;        
+        
+
+        case 0x8b:
+            /*
+             * mov r32, rm32
+             */
+            mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm  = (emulator->instruction[emulator->MODRM] & 0x07);
+            r32  = (std::int8_t)reg;
+
+            if(mod == 3) {
+                rm32 = rm;
+                emulator->operand[1] = (std::uint32_t*)&(emulator->registers[rm32]);
+            }
+            else {
+                rm32 = calcMemoryAddress(emulator);
+                std::printf("memory address: 0x%x\n", rm32);
+                emulator->operand[1] = (std::uint32_t*)&(emulator->memory[rm32]);
+            }
+            
+            emulator->operand[0] = (std::uint32_t*)&(emulator->registers[r32]);
 
             break;        
         

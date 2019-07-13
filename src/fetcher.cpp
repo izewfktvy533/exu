@@ -55,6 +55,10 @@ void Fetcher::fetch(Emulator* emulator) {
             /*
              * mov r8, rm8
              */
+        case 0x8b:
+            /*
+             * mov r32, rm32
+             */
             emulator->instruction[emulator->OPECODE] = emulator->head;
             emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
 
