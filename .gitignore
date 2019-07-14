@@ -1,3 +1,5 @@
+!bin/.gitkeep
+!doc/instruction_set.png
 doc/
 bin/
 a.out
