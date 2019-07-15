@@ -30,7 +30,7 @@ std::uint32_t Operander::calcMemoryAddress(Emulator* emulator) {
             std::exit(1);
         }
         else {
-            std::uint8_t disp8 = emulator->instruction[emulator->DISP8];
+            std::int8_t disp8 = emulator->instruction[emulator->DISP8];
             return emulator->registers[rm] + disp8;
         }
     }
@@ -41,7 +41,7 @@ std::uint32_t Operander::calcMemoryAddress(Emulator* emulator) {
             std::exit(1);
         }
         else {
-            std::uint32_t disp32 = emulator->instruction[emulator->DISP32];
+            std::int32_t disp32 = emulator->instruction[emulator->DISP32];
             return emulator->registers[rm] + disp32;
         }
     }
@@ -227,6 +227,7 @@ void Operander::operand(Emulator* emulator) {
             }
             
             break;
+
         
         case 0xc6:
             mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
@@ -250,6 +251,33 @@ void Operander::operand(Emulator* emulator) {
                     }
 
                     emulator->operand[1] = (std::uint32_t*)&(emulator->instruction[emulator->IMM8]);
+            }
+
+            break;
+
+
+        case 0xc7:
+            mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm  = (emulator->instruction[emulator->MODRM] & 0x07);
+
+            
+            switch(reg) {
+                case 0:
+                    /*
+                     * mov rm32, imm32
+                     */
+                    if(mod == 3) {
+                        std::uint8_t r32 = rm;
+                        emulator->operand[0] = (std::uint32_t*)&(emulator->registers[r32]);
+                    }
+                    else {
+                        std::uint32_t m32 = calcMemoryAddress(emulator);
+                        std::printf("memory address: 0x%x\n", m32);
+                        emulator->operand[0] = (std::uint32_t*)&(emulator->memory[m32]);
+                    }
+
+                    emulator->operand[1] = (std::uint32_t*)&(emulator->instruction[emulator->IMM32]);
             }
 
             break;
