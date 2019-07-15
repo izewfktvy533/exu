@@ -96,6 +96,23 @@ void Writebacker::writeback(Emulator* emulator) {
             break;
 
 
+        case 0xc7:
+            /*
+             * mov rm32, imm32
+             */
+            *(emulator->operand[0]) = (std::int32_t)(*(emulator->operand[1]));
+            break;
+
+        
+        case 0xe9:
+            /*
+             * jmp rel16
+             * jmp rel32
+             */
+            *(emulator->operand[0]) = (std::uint8_t)((*(emulator->operand[0])) + (*((std::int32_t*)(emulator->operand[1]))));
+            break;
+
+
         case 0xeb:
             /*
              * jmp rel8
