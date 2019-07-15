@@ -8,7 +8,7 @@ void Fetcher::fetch(Emulator* emulator) {
     emulator->head = emulator->memory[emulator->registers[emulator->EIP]++];
     memset(emulator->instruction, 0, sizeof(emulator->instruction)*emulator->OFFSETS_COUNT);
     std::uint8_t mod;
-    std::uint8_t opecode;
+    std::uint8_t opecode, reg;
     std::uint8_t rm;
 
 
@@ -106,6 +106,58 @@ void Fetcher::fetch(Emulator* emulator) {
              * ret
              */
             emulator->instruction[emulator->OPECODE] = emulator->head;
+            break;
+
+
+        case 0xc6:
+            /*
+             * mov rm8, imm8
+             */
+            emulator->instruction[emulator->OPECODE] = emulator->head;
+            emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
+            
+            mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm  = (emulator->instruction[emulator->MODRM] & 0x07);
+
+            if(mod == 1) {
+                emulator->instruction[emulator->DISP8] = emulator->memory[emulator->registers[emulator->EIP]++];
+            }
+            else if(mod == 2) {
+                for(int i=0; i<4; i++) {
+                    emulator->instruction[emulator->DISP32] |= emulator->memory[emulator->registers[emulator->EIP]++] << (i * 8);
+                }
+            }
+
+            emulator->instruction[emulator->IMM8] = emulator->memory[emulator->registers[emulator->EIP]++];
+
+            break;
+        
+
+        case 0xc7:
+            /*
+             * mov rm32, imm32
+             */
+            emulator->instruction[emulator->OPECODE] = emulator->head;
+            emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
+            
+            mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm  = (emulator->instruction[emulator->MODRM] & 0x07);
+
+            if(mod == 1) {
+                emulator->instruction[emulator->DISP8] = emulator->memory[emulator->registers[emulator->EIP]++];
+            }
+            else if(mod == 2) {
+                for(int i=0; i<4; i++) {
+                    emulator->instruction[emulator->DISP32] |= emulator->memory[emulator->registers[emulator->EIP]++] << (i * 8);
+                }
+            }
+
+            for(int i=0; i<4; i++) {
+                emulator->instruction[emulator->IMM32] |= emulator->memory[emulator->registers[emulator->EIP]++] << (i * 8);
+            }
+
             break;
 
 

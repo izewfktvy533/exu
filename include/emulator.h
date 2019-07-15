@@ -36,10 +36,11 @@ class Emulator {
             SIB,
             DISP8,
             DISP32,
-            IMME8,
+            IMM8,
             IMM32,
             REL8,
             REL32,
+            IMM,
             OFFSETS_COUNT
         };
 

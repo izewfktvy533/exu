@@ -58,6 +58,14 @@ int Decoder::decode(Emulator* emulator) {
             /*
              * ret
              */
+        case 0xc6:
+            /*
+             * mov rm8, imm8
+             */
+        case 0xc7:
+            /*
+             * mov rm32, imm32
+             */
         case 0xc9:
             /*
              * leave
