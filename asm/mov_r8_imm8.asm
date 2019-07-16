@@ -1,0 +1,11 @@
+BITS 32
+    org 0x7c00
+    mov al, 0x01
+    mov cl, 0x02
+    mov dl, 0x03
+    mov bl, 0x04
+    mov ah, 0x05
+    mov ch, 0x06
+    mov dh, 0x07
+    mov bh, 0x08
+    jmp 0
