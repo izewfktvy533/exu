@@ -5,6 +5,14 @@
 
 void Writebacker::writeback(Emulator* emulator) {
     switch(emulator->head) {
+        case 0x01:
+            /*
+             * add rm32, r32
+             */
+            *(emulator->operand[0]) = emulator->executedResult;
+            break;
+
+
         case 0x50:
         case 0x51:
         case 0x52:
