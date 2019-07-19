@@ -66,6 +66,30 @@ void Operander::operand(Emulator* emulator) {
     std::int32_t r32;
 
     switch(emulator->head) {
+        case 0x01:
+            /*
+             * add rm32, r32
+             */
+            mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm  = (emulator->instruction[emulator->MODRM] & 0x07);
+            r32 = reg;
+
+            if(mod == 3) {
+                rm32 = rm;
+                emulator->operand[0] = (std::uint32_t*)(&(emulator->registers[rm32]));
+            }
+            else{
+                rm32 = calcMemoryAddress(emulator);
+                std::printf("memory address: 0x%x\n", rm32);
+                emulator->operand[0] = (std::uint32_t*)(&(emulator->memory[rm32]));
+            }
+            
+            emulator->operand[1] = (std::uint32_t*)(&(emulator->registers[r32]));
+
+            break;
+
+
         case 0x50:
         case 0x51:
         case 0x52:

@@ -48,6 +48,7 @@ class Emulator {
         std::uint8_t*  memory;
         std::uint8_t   head;
         std::uint32_t* operand[2];
+        std::uint32_t  executedResult;
         std::uint32_t  instruction[OFFSETS_COUNT];
 
         void init(FILE*);
