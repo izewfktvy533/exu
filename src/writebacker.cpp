@@ -9,6 +9,11 @@ void Writebacker::writeback(Emulator* emulator) {
             /*
              * add rm32, r32
              */
+
+        case 0x03:
+            /*
+             * add r32, rm32
+             */
             *(emulator->operand[0]) = emulator->executedResult;
             break;
 

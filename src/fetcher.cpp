@@ -17,6 +17,10 @@ void Fetcher::fetch(Emulator* emulator) {
             /*
              * add rm32, r32
              */
+        case 0x03:
+            /*
+             * add r32, rm32
+             */
             emulator->instruction[emulator->OPECODE] = emulator->head;
             emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
 
