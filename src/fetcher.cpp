@@ -17,6 +17,36 @@ void Fetcher::fetch(Emulator* emulator) {
             /*
              * add rm32, r32
              */
+        case 0x03:
+            /*
+             * add r32, rm32
+             */
+            emulator->instruction[emulator->OPECODE] = emulator->head;
+            emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
+
+            mod     = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            opecode = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm      = (emulator->instruction[emulator->MODRM] & 0x07);
+
+            if(mod != 3 && rm == 4) {
+                emulator->instruction[emulator->SIB] = emulator->memory[emulator->registers[emulator->EIP]++];
+            }
+            if((mod == 0 && rm == 5) || mod == 2) {
+                for(int i=0; i<4; i++) {
+                    emulator->instruction[emulator->DISP32] |= emulator->memory[emulator->registers[emulator->EIP]++] << (i * 8);
+                }
+            }
+            else if(mod == 1) {
+                emulator->instruction[emulator->DISP8] = emulator->memory[emulator->registers[emulator->EIP]++];
+            }
+
+            break;
+        
+
+        case 0x29:
+            /*
+             * sub rm32, r32
+             */
             emulator->instruction[emulator->OPECODE] = emulator->head;
             emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
 

@@ -10,6 +10,17 @@ int Decoder::decode(Emulator* emulator) {
              * add rm32, r32
              */
 
+        case 0x03:
+            /*
+             * add r32, rm32
+             */
+
+
+        case 0x29:
+            /*
+             * sub rm32, r32
+             */
+
         case 0x50:
         case 0x51:
         case 0x52:
