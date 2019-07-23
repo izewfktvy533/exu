@@ -47,6 +47,10 @@ void Fetcher::fetch(Emulator* emulator) {
             /*
              * sub rm32, r32
              */
+        case 0x2b:
+            /*
+             * sub r32, rm32
+             */
             emulator->instruction[emulator->OPECODE] = emulator->head;
             emulator->instruction[emulator->MODRM] = emulator->memory[emulator->registers[emulator->EIP]++];
 
@@ -202,7 +206,6 @@ void Fetcher::fetch(Emulator* emulator) {
             }
 
             emulator->instruction[emulator->IMM8] = emulator->memory[emulator->registers[emulator->EIP]++];
-
             break;
         
 

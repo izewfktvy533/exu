@@ -22,6 +22,11 @@ void Executer::execute(Emulator* emulator) {
             /*
              * sub rm32, r32
              */
+        
+        case 0x2b:
+            /*
+             * sub r32, rm32
+             */
             emulator->executedResult = *(emulator->operand[0]) - *(emulator->operand[1]);
             break;
 

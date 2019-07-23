@@ -22,6 +22,10 @@ void Writebacker::writeback(Emulator* emulator) {
             /*
              * sub rm32, r32
              */
+        case 0x2b:
+            /*
+             * sub r32, rm32
+             */
             *(emulator->operand[0]) = emulator->executedResult;
             break;
 
