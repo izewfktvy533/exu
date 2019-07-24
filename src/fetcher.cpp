@@ -223,7 +223,7 @@ void Fetcher::fetch(Emulator* emulator) {
             if(mod == 1) {
                 emulator->instruction[emulator->DISP8] = emulator->memory[emulator->registers[emulator->EIP]++];
             }
-            else if(mod == 2) {
+            else if((mod == 0 && rm == 5) || mod == 2) {
                 for(int i=0; i<4; i++) {
                     emulator->instruction[emulator->DISP32] |= emulator->memory[emulator->registers[emulator->EIP]++] << (i * 8);
                 }
