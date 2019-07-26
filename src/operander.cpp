@@ -190,6 +190,32 @@ void Operander::operand(Emulator* emulator) {
             emulator->registers[emulator->ESP] = emulator->registers[emulator->ESP] + 4;
             break;
 
+        
+        case 0x83:
+            mod = (emulator->instruction[emulator->MODRM] & 0xc0) >> 6;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            rm  = (emulator->instruction[emulator->MODRM] & 0x07);
+            
+            switch(reg) {
+                case 5:
+                    /*
+                     * sub rm16, imm8
+                     * sub rm32, imm8
+                     */
+                    if(mod == 3) {
+                        std::uint8_t r32 = rm;
+                        emulator->operand[0] = (std::uint32_t*)&(emulator->registers[r32]);
+                    }
+                    else {
+                        std::uint32_t m32 = calcMemoryAddress(emulator);
+                        std::printf("memory address: 0x%x\n", m32);
+                        emulator->operand[0] = (std::uint32_t*)&(emulator->memory[m32]);
+                    }
+
+                    emulator->operand[1] = (std::uint32_t*)&(emulator->instruction[emulator->IMM8]);
+            }
+            break;
+
 
 
         case 0x88:
