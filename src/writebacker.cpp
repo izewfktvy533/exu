@@ -66,6 +66,16 @@ void Writebacker::writeback(Emulator* emulator) {
             break;
 
 
+        case 0x83:
+            /*
+             * sub rm16, imm8
+             * sub rm32, imm8
+             */
+            *(emulator->operand[0]) = emulator->executedResult;
+            break;
+
+
+
         case 0x88:
             /*
              * mov rm8, r8
