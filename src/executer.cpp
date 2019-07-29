@@ -29,16 +29,33 @@ void Executer::execute(Emulator* emulator) {
              */
 
         case 0x83:
-            /*
-             * sub rm16, imm8
-             * sub rm32, imm8
-             */
-            emulator->executedResult = *(emulator->operand[0]) - *(emulator->operand[1]);
+            std::uint8_t reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            
+            switch(reg) {
+                case 0:
+                    /*
+                     * add rm16, imm8
+                     * add rm32, imm8
+                     */
+                    emulator->executedResult = *(emulator->operand[0]) + *(emulator->operand[1]);
 
-            std::printf("operand0: 0x%x\n", *emulator->operand[0]);
-            std::printf("operand1: 0x%x\n", *emulator->operand[1]);
-            std::printf("executed: 0x%x\n", emulator->executedResult);
-            break;
+                    std::printf("operand0: 0x%x\n", *emulator->operand[0]);
+                    std::printf("operand1: 0x%x\n", *emulator->operand[1]);
+                    std::printf("executed: 0x%x\n", emulator->executedResult);
+                    break;
+                
+                case 5:
+                    /*
+                     * sub rm16, imm8
+                     * sub rm32, imm8
+                     */
+                    emulator->executedResult = *(emulator->operand[0]) - *(emulator->operand[1]);
+
+                    std::printf("operand0: 0x%x\n", *emulator->operand[0]);
+                    std::printf("operand1: 0x%x\n", *emulator->operand[1]);
+                    std::printf("executed: 0x%x\n", emulator->executedResult);
+                    break;
+            }
 
             
         defualt:
