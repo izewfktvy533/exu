@@ -51,6 +51,8 @@ int Decoder::decode(Emulator* emulator) {
 
         case 0x83:
             /*
+             * add rm16, imm8
+             * add rm32, imm8
              * sub rm16, imm8
              * sub rm32, imm8
              */

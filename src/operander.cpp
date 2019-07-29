@@ -197,6 +197,12 @@ void Operander::operand(Emulator* emulator) {
             rm  = (emulator->instruction[emulator->MODRM] & 0x07);
             
             switch(reg) {
+                case 0:
+                    /*
+                     * add rm16, imm8
+                     * add rm32, imm8
+                     */
+
                 case 5:
                     /*
                      * sub rm16, imm8
