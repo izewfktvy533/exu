@@ -48,6 +48,11 @@ int Decoder::decode(Emulator* emulator) {
             /*
              * pop r32
              */
+        
+        case 0x81:
+            /*
+             * add rm32 imm32
+             */
 
         case 0x83:
             /*

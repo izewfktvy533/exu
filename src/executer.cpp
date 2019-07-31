@@ -4,6 +4,9 @@
 
 
 void Executer::execute(Emulator* emulator) {
+    std::uint8_t reg;
+
+
     switch(emulator->head) {
         case 0x01:
             /*
@@ -27,9 +30,30 @@ void Executer::execute(Emulator* emulator) {
             /*
              * sub r32, rm32
              */
+            emulator->executedResult = *(emulator->operand[0]) + *(emulator->operand[1]);
+            break;
+
+        
+        case 0x81:
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            
+            switch(reg) {
+                case 0:
+                    /*
+                     * add rm32, imm8
+                     */
+                    emulator->executedResult = *(emulator->operand[0]) + *(emulator->operand[1]);
+
+                    std::printf("operand0: 0x%x\n", *emulator->operand[0]);
+                    std::printf("operand1: 0x%x\n", *emulator->operand[1]);
+                    std::printf("executed: 0x%x\n", emulator->executedResult);
+                    break;
+            }
+            break;
+
 
         case 0x83:
-            std::uint8_t reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
+            reg = (emulator->instruction[emulator->MODRM] & 0x38) >> 3;
             
             switch(reg) {
                 case 0:
@@ -56,6 +80,8 @@ void Executer::execute(Emulator* emulator) {
                     std::printf("executed: 0x%x\n", emulator->executedResult);
                     break;
             }
+            break;
+
 
             
         defualt:

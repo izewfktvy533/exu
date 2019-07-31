@@ -65,6 +65,10 @@ void Writebacker::writeback(Emulator* emulator) {
 
             break;
 
+        case 0x81:
+            /*
+             * add rm32, imm32
+             */
 
         case 0x83:
             /*
@@ -75,7 +79,6 @@ void Writebacker::writeback(Emulator* emulator) {
              */
             *(emulator->operand[0]) = emulator->executedResult;
             break;
-
 
 
         case 0x88:
